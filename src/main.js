@@ -3,8 +3,12 @@
  * @Author: xiaoming.bai
  * @Date: 2019-05-31 20:04:03
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-06-13 16:05:36
+ * @Last Modified time: 2019-06-13 18:10:29
  */
+
+import '@/assets/fonts/iconfont.css'
+import '@/assets/stylesheets/common.scss'
+import '@/assets/stylesheets/reset.scss'
 
 import Vue from 'vue'
 import App from './App.vue'
