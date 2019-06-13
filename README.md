@@ -1,8 +1,6 @@
 # webpack-spa-template
 
-这是一个使用 webpack 配置单页应用(SPA)的简易 demo。
-
-页面使用 Vue 编写，无 SEO。
+这是一个使用 webpack 配置单页应用(SPA)的简易 demo，页面使用 Vue 编写，无 SEO。
 
 ## Framework
 
@@ -10,12 +8,14 @@
 
 Node.js 10.x | webpack 4.x | babel 7.x | babel-loader 8.x | vue 2.x
 
+Vue 生态：vue + vuex + vue-router + axios + UI库（TODO）
+
 ## Usage
 
 ```bash
-# init git
+# dev
+$ npm run dev
 
-
-# init npm
-$ npm init
+# build for prod
+$ npm run build
 ```
