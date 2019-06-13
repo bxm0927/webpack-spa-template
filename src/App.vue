@@ -14,7 +14,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import BaseButton from '@/components/BaseButton'
+import BaseButton from '@/components/base/BaseButton'
 import { getData } from '@/assets/javascripts/util'
 
 export default {

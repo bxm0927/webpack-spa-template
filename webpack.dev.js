@@ -3,7 +3,7 @@
  * @Author: xiaoming.bai
  * @Date: 2019-06-04 15:16:42
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-06-13 15:15:13
+ * @Last Modified time: 2019-06-13 16:09:38
  */
 
 const path = require('path')
@@ -17,8 +17,5 @@ module.exports = merge(common, {
     contentBase: path.join(__dirname, './dist'),
     compress: true,
     port: 9000,
-  },
-  performance: {
-    hints: 'warning', // 当单个资源超过 250kb 时警告
   },
 })

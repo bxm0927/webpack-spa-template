@@ -13,9 +13,15 @@ Vue 生态：vue + vuex + vue-router + axios + UI库（TODO）
 ## Usage
 
 ```bash
+# install dependencies
+$ npm install
+
 # dev
 $ npm run dev
 
-# build for prod
+# build
 $ npm run build
+
+# analyse
+$ npm run analyse
 ```

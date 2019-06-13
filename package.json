@@ -4,13 +4,18 @@
   "description": "My praiseworthy wabpack-spa project",
   "main": "index.js",
   "author": "xiaoming.bai",
-  "repository": {},
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bxm0927/webpack-spa-template"
+  },
   "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack.dev.js",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.prod.js",
+    "analyse": "cross-env NODE_ENV=production webpack --config webpack.prod.js --profile --json > stats.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.4.4",
     "@babel/runtime": "^7.4.5",
     "lodash": "^4.17.11",
     "vue": "^2.6.10",
