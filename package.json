@@ -7,7 +7,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bxm0927/webpack-spa-template"
+    "url": "git+https://github.com/bxm0927/webpack-spa-template.git"
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack.dev.js",
