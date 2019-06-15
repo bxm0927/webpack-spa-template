@@ -20,6 +20,10 @@ import ChapterList from '@/components/detail/ChapterList'
 import { GET_CLASS_CHAPTER, GET_CLASS_NOTE } from '@/assets/javascripts/api'
 
 export default {
+  components: {
+    ChapterList,
+    NoteList,
+  },
   data() {
     return {
       id: '',
@@ -46,10 +50,6 @@ export default {
       this.$store.commit('setClassChapterData', data[0].data)
       this.$store.commit('setClassNoteData', data[1].data)
     },
-  },
-  components: {
-    ChapterList,
-    NoteList,
   },
 }
 </script>

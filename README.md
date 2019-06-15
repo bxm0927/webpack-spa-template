@@ -20,7 +20,7 @@
 
 Node.js 10.x | webpack 4.x | babel 7.x | babel-loader 8.x | vue 2.x
 
-Vue 生态：vue + vuex + vue-router + axios + UI库（TODO）
+Vue 生态：vue + vuex + vue-router + axios + Vant
 
 ## Usage
 

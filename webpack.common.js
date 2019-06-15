@@ -3,7 +3,7 @@
  * @Author: xiaoming.bai
  * @Date: 2019-05-28 18:03:12
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-06-13 15:22:11
+ * @Last Modified time: 2019-06-15 14:37:23
  */
 
 const path = require('path')
@@ -56,7 +56,6 @@ module.exports = {
           'postcss-loader',
           'sass-loader',
         ],
-        include: path.resolve(__dirname, './src'),
       },
       {
         test: /\.less$/,
@@ -104,6 +103,7 @@ module.exports = {
     new webpack.HashedModuleIdsPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './index.html'),
+      favicon: './favicon.ico',
     }),
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',

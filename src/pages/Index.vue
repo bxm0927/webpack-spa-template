@@ -5,53 +5,63 @@
       <p class="subtitle">你的指尖，有改变世界的力量</p>
     </div>
 
-    <ul class="class-list">
-      <li :key="item.id" class="list-item" v-for="item in classesData.data">
-        <router-link :to="'/detail/' + item.id">
-          <div class="picture">
-            <img :alt="item.title" :src="item.image" class="image">
-          </div>
+    <ClassList :classes="classesData.data"/>
 
-          <div class="overview">
-            <h2 class="title ellipsis">{{ item.title }}</h2>
-            <h3 class="subtitle">{{ item.subtitle }}</h3>
-
-            <p class="time">
-              <span class="timespan">{{ item.timespan }}</span>
-
-              <span class="hasnote fr" v-if="+item.hasnote">
-                <i class="iconfont icon-yumaoqiu"></i>
-                有笔记
-              </span>
-              <span class="hasnote fr" v-else>
-                <i class="iconfont icon-lvyou1"></i>
-                无笔记
-              </span>
-            </p>
-          </div>
-        </router-link>
-      </li>
-    </ul>
+    <van-button
+      @click="nextPage"
+      class="next-page"
+      round
+      type="primary"
+    >下一页（{{ classesData.curPage }} / {{ classesData.totalCount }}）</van-button>
   </main>
 </template>
 
 <script>
+import Vue from 'vue'
 import axios from 'axios'
+import { Button } from 'vant'
 import { mapState } from 'vuex'
+import ClassList from '@/components/index/ClassList'
 import { GET_CLASSES } from '@/assets/javascripts/api'
+
+Vue.use(Button)
 
 export default {
   name: 'App',
+  components: {
+    ClassList,
+  },
+  data() {
+    return {
+      pageIndex: 1,
+    }
+  },
   computed: {
-    ...mapState(['classesData']),
+    ...mapState(['classesData', 'curPage']),
   },
   created() {
     this.loadClassesData()
   },
   methods: {
     async loadClassesData() {
-      const { data } = await axios.get(GET_CLASSES)
+      const { data } = await axios.get(GET_CLASSES, {
+        params: { curPage: this.curPage },
+      })
+
       this.$store.commit('setClassesData', data)
+    },
+    async nextPage() {
+      const nextPage = this.curPage + 1
+      const { data } = await axios.get(GET_CLASSES, {
+        params: { curPage: this.curPage + 1 },
+      })
+
+      console.info('data: ', data)
+
+      this.$store.commit('setCurPage', this.curPage + 1)
+      this.$store.commit('setClassesData', data)
+
+      document.documentElement.scrollTop = document.body.scrollTop = 0
     },
   },
 }
@@ -67,43 +77,8 @@ export default {
   background-color: #f2f2f2;
 }
 
-.class-list {
-  margin-top: 20px;
-  padding: 0 24px;
-}
-
-.list-item {
-  box-sizing: border-box;
-  margin-bottom: 16px;
-  padding: 4px;
-  width: 100%;
-  border: 0.5px solid #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
-  .picture {
-    position: relative;
-    font-size: 0;
-    .image {
-      width: 100%;
-      border-radius: 8px 8px 0 0;
-    }
-  }
-  .overview {
-    padding: 10px;
-    .title {
-      color: #333;
-      font-weight: bold;
-      font-size: 18px;
-    }
-    .subtitle {
-      color: #333;
-      font-weight: normal;
-      font-size: 12px;
-    }
-    .time {
-      margin-top: 6px;
-      color: #8a8a8a;
-    }
-  }
+.next-page {
+  display: block;
+  margin: 10px auto;
 }
 </style>
