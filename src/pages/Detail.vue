@@ -1,40 +1,22 @@
 <template>
   <main class="page-detail">
-    <section class="chapter-wrapper">
-      <h2>课程大纲</h2>
+    <header class="header">
+      <span @click="$router.go(-1)" class="back">&lt;</span>
+      <span class="title">课程详情</span>
+      <router-link class="home" to="/">首页</router-link>
+    </header>
 
-      <ul class="chapter-list" v-if="classChapterData && classChapterData.length">
-        <li :key="item.id" class="chapter-item" v-for="(item, index) in classChapterData">
-          <h3>{{ index + 1 }}. {{ item.title }}</h3>
+    <ChapterList :class-chapter-data="classChapterData"/>
 
-          <ul class="subtitle-list">
-            <li :key="sub.id" class="subtitle-item" v-for="(sub, subIndex) in item.subTitle">
-              {{ index + 1 }}-{{ subIndex + 1}}.
-              <a
-                :href="`http://www.imooc.com/${sub.titletype}/${sub.mid}`"
-              >{{ sub.title }}</a>
-              <span class="time" v-if="sub.timespan">({{ sub.timespan }})</span>
-              <span class="type" v-if="sub.titletype === 'code'">(编程)</span>
-              <span class="type" v-if="sub.titletype === 'ceping'">(练习)</span>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </section>
-
-    <section class="note-wrapper" v-if="classNoteData && classNoteData.length">
-      <h2>课程笔记</h2>
-
-      <ul class="note-list" v-if="classChapterData && classChapterData.length">
-        <li :key="item.id" class="note-item" v-for="(item, index) in classNoteData">{{ index }}</li>
-      </ul>
-    </section>
+    <NoteList :class-note-data="classNoteData"/>
   </main>
 </template>
 
 <script>
 import axios from 'axios'
 import { mapState } from 'vuex'
+import NoteList from '@/components/detail/NoteList'
+import ChapterList from '@/components/detail/ChapterList'
 import { GET_CLASS_CHAPTER, GET_CLASS_NOTE } from '@/assets/javascripts/api'
 
 export default {
@@ -65,11 +47,50 @@ export default {
       this.$store.commit('setClassNoteData', data[1].data)
     },
   },
+  components: {
+    ChapterList,
+    NoteList,
+  },
 }
 </script>
 
+<style lang="scss" >
+.part {
+  margin: 20px;
+  padding: 14px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px 0 rgba(7, 17, 27, 0.1);
+}
+
+.part-title {
+  margin: 0 auto;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 20px;
+  background-color: #86ff00;
+  border-radius: 20px;
+}
+</style>
+
 <style lang="scss" scoped>
-.detail {
-  color: red;
+.page-detail {
+  background-color: #f8fafc;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 0 20px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 0 4px 8px 0 rgba(28, 31, 33, 0.1);
+  .title {
+    font-weight: bold;
+  }
 }
 </style>
