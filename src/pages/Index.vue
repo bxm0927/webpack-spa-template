@@ -7,12 +7,11 @@
 
     <ClassList :classes="classesData.data"/>
 
-    <van-button
-      @click="nextPage"
-      class="next-page"
-      round
-      type="primary"
-    >下一页（{{ classesData.curPage }} / {{ classesData.totalCount }}）</van-button>
+    <div class="pagination">
+      <van-button @click="prevPage" class="next-page" round type="primary">上一页</van-button>
+      <span>（{{ classesData.curPage }} / {{ classesData.totalCount }}）</span>
+      <van-button @click="nextPage" class="next-page" round type="primary">下一页</van-button>
+    </div>
   </main>
 </template>
 
@@ -50,15 +49,26 @@ export default {
 
       this.$store.commit('setClassesData', data)
     },
+    async prevPage() {
+      const nextPage = this.curPage - 1
+      if (nextPage < 1) return
+
+      this.loadPageData(nextPage)
+    },
     async nextPage() {
       const nextPage = this.curPage + 1
+      if (nextPage > this.classesData.totalCount) return
+
+      this.loadPageData(nextPage)
+    },
+    async loadPageData(curPage) {
       const { data } = await axios.get(GET_CLASSES, {
-        params: { curPage: this.curPage + 1 },
+        params: { curPage },
       })
 
       console.info('data: ', data)
 
-      this.$store.commit('setCurPage', this.curPage + 1)
+      this.$store.commit('setCurPage', curPage)
       this.$store.commit('setClassesData', data)
 
       document.documentElement.scrollTop = document.body.scrollTop = 0
@@ -77,8 +87,13 @@ export default {
   background-color: #f2f2f2;
 }
 
+.pagination {
+  display: flex;
+  align-items: center;
+}
+
 .next-page {
-  display: block;
+  display: inline-block;
   margin: 10px auto;
 }
 </style>
