@@ -3,7 +3,7 @@
  * @Author: xiaoming.bai
  * @Date: 2019-05-28 18:03:12
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-06-15 14:37:23
+ * @Last Modified time: 2019-06-16 13:05:15
  */
 
 const path = require('path')
@@ -56,10 +56,6 @@ module.exports = {
           'postcss-loader',
           'sass-loader',
         ],
-      },
-      {
-        test: /\.less$/,
-        use: ['vue-style-loader', 'css-loader', 'less-loader'],
       },
       {
         test: /\.js$/,
