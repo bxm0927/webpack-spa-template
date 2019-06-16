@@ -31,8 +31,11 @@ $ npm install
 # dev
 $ npm run dev
 
-# build
-$ npm run build
+# build for development
+$ npm run build:dev
+
+# build for production
+$ npm run build:prod
 
 # analyse
 $ npm run analyse
