@@ -17,7 +17,7 @@ import axios from 'axios'
 import { mapState } from 'vuex'
 import NoteList from '@/components/detail/NoteList'
 import ChapterList from '@/components/detail/ChapterList'
-import { GET_CLASS_CHAPTER, GET_CLASS_NOTE } from '@/assets/javascripts/api'
+import { getClassChapter, getClassNote } from '@/api'
 
 export default {
   components: {
@@ -42,10 +42,7 @@ export default {
       this.id = id
     },
     async loadData() {
-      const data = await axios.all([
-        axios.get(GET_CLASS_CHAPTER, { params: { cid: this.id } }),
-        axios.get(GET_CLASS_NOTE, { params: { cid: this.id } }),
-      ])
+      const data = await axios.all([getClassChapter(this.id), getClassNote(this.id)])
 
       this.$store.commit('setClassChapterData', data[0].data)
       this.$store.commit('setClassNoteData', data[1].data)

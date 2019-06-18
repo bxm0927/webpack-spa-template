@@ -21,8 +21,9 @@ import Vue from 'vue'
 import axios from 'axios'
 import { Button } from 'vant'
 import { mapState } from 'vuex'
+import { getClasses } from '@/api'
+import { gotoTop } from '@/assets/javascripts/utils'
 import ClassList from '@/components/index/ClassList'
-import { GET_CLASSES } from '@/assets/javascripts/api'
 
 Vue.use(Button)
 
@@ -40,39 +41,26 @@ export default {
     ...mapState(['classesData', 'curPage']),
   },
   created() {
-    this.loadClassesData()
+    this.loadPageData(this.curPage)
   },
   methods: {
-    async loadClassesData() {
-      const { data } = await axios.get(GET_CLASSES, {
-        params: { curPage: this.curPage },
-      })
-
-      this.$store.commit('setClassesData', data)
-    },
-    async prevPage() {
-      const nextPage = this.curPage - 1
-      if (nextPage < 1) return
-
-      this.loadPageData(nextPage)
-    },
-    async nextPage() {
-      const nextPage = this.curPage + 1
-      if (nextPage > this.classesData.totalCount) return
-
-      this.loadPageData(nextPage)
-    },
     async loadPageData(curPage) {
-      const { data } = await axios.get(GET_CLASSES, {
-        params: { curPage },
-      })
-
-      console.info('data: ', data)
+      const { data } = await getClasses(curPage)
 
       this.$store.commit('setCurPage', curPage)
       this.$store.commit('setClassesData', data)
 
-      document.documentElement.scrollTop = document.body.scrollTop = 0
+      gotoTop()
+    },
+    prevPage() {
+      const nextPage = this.curPage - 1
+      if (nextPage < 1) return
+      this.loadPageData(nextPage)
+    },
+    nextPage() {
+      const nextPage = this.curPage + 1
+      if (nextPage > this.classesData.totalCount) return
+      this.loadPageData(nextPage)
     },
   },
 }

@@ -3,7 +3,7 @@
  * @Author: xiaoming.bai
  * @Date: 2019-06-15 13:21:52
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-06-15 13:24:35
+ * @Last Modified time: 2019-06-18 17:07:58
  */
 
 /**
@@ -22,4 +22,11 @@ export const formatDate = time => {
 
   const str = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second
   return str
+}
+
+/**
+ * 回到顶部
+ */
+export const gotoTop = () => {
+  document.documentElement.scrollTop = document.body.scrollTop = 0
 }

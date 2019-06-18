@@ -3,7 +3,7 @@
  * @Author: xiaoming.bai
  * @Date: 2019-06-04 15:16:42
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-06-13 16:09:38
+ * @Last Modified time: 2019-06-18 17:51:48
  */
 
 const path = require('path')
@@ -13,9 +13,12 @@ const common = require('./webpack.common.js')
 module.exports = merge(common, {
   mode: 'development',
   devtool: 'inline-source-map',
+  performance: {
+    hints: false,
+  },
   devServer: {
-    contentBase: path.join(__dirname, './dist'),
+    contentBase: path.join(__dirname, '../dist'),
     compress: true,
-    port: 9000,
+    port: 9527,
   },
 })

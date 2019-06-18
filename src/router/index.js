@@ -3,7 +3,7 @@
  * @Author: xiaoming.bai
  * @Date: 2019-06-01 18:22:20
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-06-14 18:50:50
+ * @Last Modified time: 2019-06-18 17:35:24
  */
 
 import Vue from 'vue'
@@ -14,7 +14,7 @@ import Detail from '@/pages/Detail'
 
 Vue.use(VueRouter)
 
-const router = new VueRouter({
+export default new VueRouter({
   routes: [
     {
       path: '/',
@@ -28,5 +28,3 @@ const router = new VueRouter({
     },
   ],
 })
-
-export default router

@@ -23,7 +23,7 @@ pids
 *.seed
 *.pid.lock
 
-# IDE&Editor directories and files
+# Editor directories and files
 /idea/
 .idea
 .vscode
