@@ -40,3 +40,10 @@ $ npm run build:prod
 # analyse
 $ npm run analyse
 ```
+
+## Q&A
+
+使用图片等静态资源：
+- 在 HTML `template` 中：`<img alt="cup" src="@/assets/images/cup.png">`
+- 在 CSS `style` 中：`background-image: url('../assets/images/cup.png');`
+- 在 JS `script` 中：`const cup = require('@/assets/images/cup.png')`

@@ -3,6 +3,7 @@
     <div class="banner">
       <h1 class="title">我的课程笔记</h1>
       <p class="subtitle">你的指尖，有改变世界的力量</p>
+      <img alt="cup" class="cup" src="@/assets/images/cup.png">
     </div>
 
     <ClassList :classes="classesData.data"/>
@@ -85,6 +86,12 @@ export default {
 .banner {
   padding: 20px;
   background-color: #f2f2f2;
+}
+
+.cup {
+  position: absolute;
+  right: 40px;
+  top: 30px;
 }
 
 .pagination {
