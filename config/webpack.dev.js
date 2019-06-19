@@ -3,7 +3,7 @@
  * @Author: xiaoming.bai
  * @Date: 2019-06-04 15:16:42
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-06-18 17:51:48
+ * @Last Modified time: 2019-06-19 11:56:56
  */
 
 const path = require('path')
@@ -12,7 +12,7 @@ const common = require('./webpack.common.js')
 
 module.exports = merge(common, {
   mode: 'development',
-  devtool: 'inline-source-map',
+  devtool: 'cheap-module-eval-source-map',
   performance: {
     hints: false,
   },
