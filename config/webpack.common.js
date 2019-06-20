@@ -3,7 +3,7 @@
  * @Author: xiaoming.bai
  * @Date: 2019-05-28 18:03:12
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-06-19 15:07:34
+ * @Last Modified time: 2019-06-20 17:47:30
  */
 
 const path = require('path')
@@ -100,14 +100,14 @@ module.exports = {
     new CleanWebpackPlugin(),
     new webpack.HashedModuleIdsPlugin(),
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, '../index.html'),
-      favicon: './favicon.ico',
+      template: path.resolve(__dirname, '../public/index.html'),
+      favicon: path.resolve(__dirname, '../public/favicon.ico'),
     }),
     // Copy custom static assets
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, '../static'),
-        to: 'static',
+        from: path.resolve(__dirname, '../public'),
+        to: path.resolve(__dirname, '../dist'),
       },
     ]),
     // Extract css
