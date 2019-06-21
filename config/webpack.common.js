@@ -3,7 +3,7 @@
  * @Author: xiaoming.bai
  * @Date: 2019-05-28 18:03:12
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-06-21 16:35:27
+ * @Last Modified time: 2019-06-21 17:12:37
  */
 
 const path = require('path')
@@ -20,7 +20,7 @@ module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: devMode ? '[name].js' : '[name].[contenthash].js',
+    filename: devMode ? 'js/[name].js' : 'js/[name].[contenthash].js',
     // publicPath: 'https://cdn.example.com/assets/',
   },
   optimization: {
@@ -140,8 +140,8 @@ module.exports = {
     ]),
     // Extract css
     new MiniCssExtractPlugin({
-      filename: devMode ? 'assets/css/[name].css' : 'assets/css/[name].[contenthash].css',
-      chunkFilename: devMode ? 'assets/css/[id].css' : 'assets/css/[id].[contenthash].css',
+      filename: devMode ? 'css/[name].css' : 'css/[name].[contenthash].css',
+      chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[contenthash].css',
     }),
   ],
 }
