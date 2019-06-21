@@ -3,7 +3,7 @@
  * @Author: xiaoming.bai
  * @Date: 2019-05-28 18:03:12
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-06-20 17:47:30
+ * @Last Modified time: 2019-06-21 15:14:46
  */
 
 const path = require('path')
@@ -45,6 +45,18 @@ module.exports = {
   },
   module: {
     rules: [
+      // vue
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+      },
+      // js
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+      },
+      // style
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
@@ -59,39 +71,55 @@ module.exports = {
           'sass-loader',
         ],
       },
+      // images
       {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        test: /\.(png|jpe?g|gif|webp)(\?.*)?$/,
         use: [
           {
             loader: 'url-loader',
             options: {
               limit: 8 * 1024, // 8K
-              outputPath: 'assets/images/',
-              name: devMode ? '[name].[ext]' : '[name].[hash:7].[ext]',
+              outputPath: 'img/',
+              name: devMode ? '[name].[ext]' : '[name].[hash:8].[ext]',
             },
           },
           'image-webpack-loader',
         ],
       },
+      // svg
       {
-        test: /\.(woff|woff2|eot|ttf|svg)$/,
+        test: /\.(svg)(\?.*)?$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            outputPath: 'img/',
+            name: devMode ? '[name].[ext]' : '[name].[hash:8].[ext]',
+          },
+        },
+      },
+      // fonts
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i,
         use: {
           loader: 'url-loader',
           options: {
             limit: 8 * 1024, // 8K
-            outputPath: 'assets/fonts/',
-            name: devMode ? '[name].[ext]' : '[name].[hash:7].[ext]',
+            outputPath: 'fonts/',
+            name: devMode ? '[name].[ext]' : '[name].[hash:8].[ext]',
           },
         },
       },
+      // media
       {
-        test: /\.vue$/,
-        loader: 'vue-loader',
+        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 8 * 1024, // 8K
+            outputPath: 'media/',
+            name: devMode ? '[name].[ext]' : '[name].[hash:8].[ext]',
+          },
+        },
       },
     ],
   },
