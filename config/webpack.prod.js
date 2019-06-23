@@ -3,7 +3,7 @@
  * @Author: xiaoming.bai
  * @Date: 2019-06-04 15:16:42
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-06-19 11:57:06
+ * @Last Modified time: 2019-06-21 18:20:45
  */
 
 const merge = require('webpack-merge')

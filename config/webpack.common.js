@@ -3,25 +3,26 @@
  * @Author: xiaoming.bai
  * @Date: 2019-05-28 18:03:12
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-06-21 17:12:37
+ * @Last Modified time: 2019-06-23 11:32:22
  */
 
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 
-const devMode = process.env.NODE_ENV !== 'production'
+const devEnv = process.env.NODE_ENV !== 'production'
+const prodEnv = process.env.NODE_ENV === 'production'
 
 module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: devMode ? 'js/[name].js' : 'js/[name].[contenthash].js',
-    // publicPath: 'https://cdn.example.com/assets/',
+    filename: devEnv ? 'js/[name].js' : 'js/[name].[contenthash].js',
+    publicPath: prodEnv ? '/webpack-spa-template/' : '/',
   },
   optimization: {
     usedExports: true, // tree shaking
@@ -80,7 +81,7 @@ module.exports = {
             options: {
               limit: 8 * 1024, // 8K
               outputPath: 'img/',
-              name: devMode ? '[name].[ext]' : '[name].[hash:8].[ext]',
+              name: devEnv ? '[name].[ext]' : '[name].[hash:8].[ext]',
             },
           },
           'image-webpack-loader',
@@ -93,7 +94,7 @@ module.exports = {
           loader: 'file-loader',
           options: {
             outputPath: 'img/',
-            name: devMode ? '[name].[ext]' : '[name].[hash:8].[ext]',
+            name: devEnv ? '[name].[ext]' : '[name].[hash:8].[ext]',
           },
         },
       },
@@ -105,7 +106,7 @@ module.exports = {
           options: {
             limit: 8 * 1024, // 8K
             outputPath: 'fonts/',
-            name: devMode ? '[name].[ext]' : '[name].[hash:8].[ext]',
+            name: devEnv ? '[name].[ext]' : '[name].[hash:8].[ext]',
           },
         },
       },
@@ -117,7 +118,7 @@ module.exports = {
           options: {
             limit: 8 * 1024, // 8K
             outputPath: 'media/',
-            name: devMode ? '[name].[ext]' : '[name].[hash:8].[ext]',
+            name: devEnv ? '[name].[ext]' : '[name].[hash:8].[ext]',
           },
         },
       },
@@ -129,19 +130,19 @@ module.exports = {
     new webpack.HashedModuleIdsPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../index.html'),
-      favicon: path.resolve(__dirname, '../public/favicon.ico'),
+      favicon: path.resolve(__dirname, '../static/favicon.ico'),
     }),
     // Copy custom static assets
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, '../public'),
+        from: path.resolve(__dirname, '../static'),
         to: path.resolve(__dirname, '../dist'),
       },
     ]),
     // Extract css
     new MiniCssExtractPlugin({
-      filename: devMode ? 'css/[name].css' : 'css/[name].[contenthash].css',
-      chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[contenthash].css',
+      filename: devEnv ? 'css/[name].css' : 'css/[name].[contenthash].css',
+      chunkFilename: devEnv ? 'css/[id].css' : 'css/[id].[contenthash].css',
     }),
   ],
 }
